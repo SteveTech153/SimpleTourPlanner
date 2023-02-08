@@ -1,0 +1,21 @@
+@charset "ISO-8859-1";
+.box{
+    border-radius: 10px;
+    background-color: #E7E7E7;
+    padding: 30px;
+    margin-bottom: 3%;
+    margin-left: 30%;
+    margin-right: 30%;
+    font-size: larger;
+    font-weight: 600;
+    font-family: 'Open Sans', arial, sans-serif;
+}
+.logo1{
+	height:40px;
+	width:40px;
+	float:right;
+	margin-top:-1%;
+}
+.container1{
+	background-image: url(../img/bg1.jpg);
+}

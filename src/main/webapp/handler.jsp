@@ -72,18 +72,18 @@ public double distance(double lat1,double lat2, double lon1, double lon2)
     return(c * r) + (c * r)*25/100;
 }
     public double timeToTravel(String city1,String city2){
-    if(cities.contains(city1) && cities.contains(city2)) {
-        int index1 = cities.indexOf(city1);
-        int index2 = cities.indexOf(city2);
-        double lat1 = lattitudes.get(index1);
-        double lat2 = lattitudes.get(index2);
-        double lon1 = longitudes.get(index1);
-        double lon2 = longitudes.get(index2);
-        double distance = distance(lat1, lat2, lon1, lon2);
-        double time = distance / 60;
-        return time;
-    }else
-        return -1;
+	    if(cities.contains(city1) && cities.contains(city2)) {
+	        int index1 = cities.indexOf(city1);
+	        int index2 = cities.indexOf(city2);
+	        double lat1 = lattitudes.get(index1);
+	        double lat2 = lattitudes.get(index2);
+	        double lon1 = longitudes.get(index1);
+	        double lon2 = longitudes.get(index2);
+	        double distance = distance(lat1, lat2, lon1, lon2);
+	        double time = distance / 60;
+	        return time;
+	    }else
+	        return -1;
     }
     public String nearestCity(String city, ArrayList<String> destCities){
         double minTime = 1000000000;
@@ -121,56 +121,47 @@ public double distance(double lat1,double lat2, double lon1, double lon2)
                 totalDaysSpent++;
                 totalMoneySpent+=hotelFare;
                 plan+="Hotel Stay in "+currentCity+" for 1 night\n";
-                //System.out.println("Hotel Stay in "+currentCity+" for 1 night");
                 budget-=hotelFare;
-//                if(timeSpentInACity==5) {
-//                    timeSpentInACity = 0;
-//                }
+//                
             }else{
                 if(timeSpentInACity!=5) {
                     if (time + 5 - timeSpentInACity <= 22) {
                         totalMoneySpent += 2000;
                         plan += "Visit " + currentCity + " from " + time + ":00 to " + (time + 5 - timeSpentInACity) + ":00\n";
-                        // System.out.println("Visit "+currentCity+" from "+time+":00 to "+(time+(5-timeSpentInACity))+":00");
+                    
                         time += 5 - timeSpentInACity;
                         timeSpentInACity = 5;
                         budget -= 2000;
                         citiesVisited++;
                     } else {
                         plan += "Visit " + currentCity + " from " + time + ":00 to " + (22) + ":00\n";
-                        //System.out.println("Visit "+currentCity+" from "+time+":00 to "+(22)+":00");
                         timeSpentInACity = 22 - time;
                         time = 23;
                     }
-                }               //totalMoneySpent+2000      timespentinacity==5
+                }              
                 if(time<=22 && 2000<=budget &&  citiesVisited<=totalCities+1){
                     String nearestCity = nearestCity(currentCity,destCities);
-//                    System.out.println("nearest city : "+nearestCity);
+
                     double timeToTravel = timeToTravel(currentCity,nearestCity);
                     if(timeToTravel==-1) {
-//                        System.out.println("Invalid City");
-//                        System.out.println("nearest city : "+nearestCity);
-//                        System.out.println("current city : "+currentCity);
                         break;
                     }
                     if(time+timeToTravel<=22 ){
                         time+= Math.round(timeToTravel);
                         plan+="Travel from "+currentCity+" to "+nearestCity+" for "+round(timeToTravel,1)+" hours\n";
-                        //System.out.println("Travel from "+currentCity+" to "+nearestCity+" for "+timeToTravel+" hours");
+                   
                         lattitudes.remove(cities.indexOf(currentCity));
                         longitudes.remove(cities.indexOf(currentCity));
                         destCities.remove(currentCity);
                         cities.remove(currentCity);
                         currentCity = nearestCity;
-//                        citiesVisited++;
-//                        System.out.println("time "+time );
+//                 
                         timeSpentInACity=0;
                         nearestCity = nearestCity(currentCity,destCities);
                     }else{
-//                        if(timeSpentInACity!=5)
-//                            timeSpentInACity = 22-time;
+//                      
                         time = 23;
-//                        System.out.println("Inside");
+//                      
                     }
                 }
             }
@@ -188,31 +179,7 @@ public double distance(double lat1,double lat2, double lon1, double lon2)
 	}
 %>
 <%
-    
-    
-		/*
-        public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the number of days : ");
-        int totalDays = sc.nextInt();
-        System.out.println("Enter the budget : ");
-        int budget = sc.nextInt();
-        System.out.println("Enter the starting city : ");
-        String startingCity = sc.next();
-        System.out.println("Enter the number of cities : ");
-        int noOfCities = sc.nextInt();
-        System.out.println("Enter the cities : ");
-        String[] destCities1 = new String[noOfCities];
-        for(int i=0;i<noOfCities;i++){
-            destCities1[i] = sc.next();
-        }
-        ArrayList<String> destCities = new ArrayList<>(Arrays.asList(destCities1));
-        System.out.println("Enter the starting time : ");
-        String startTimeStr = sc.next();
-        int startTime = Integer.parseInt(startTimeStr);
-        int hotelFare = 1000;
-    }
-		*/
+   
 		lattitudes.addAll(Arrays.asList(13.0827,11.0168,9.9252,10.7905,11.6643,8.7139,11.1085,12.9165,11.3410,8.7642,10.3624,10.7870,12.9487,9.4533,10.9601,11.4102,12.7409,8.1833,12.8185,11.4635,10.0735,11.5390,11.7480,10.9602,12.2253,10.6609,9.4515,12.9428,10.3833,12.6825,12.7802,10.7672,8.0883,9.5680));
 		longitudes.addAll(Arrays.asList(80.2707,76.9558,78.1198,78.7047,78.1460,77.77567,77.3411,79.1325,77.7172,78.1348,77.9695,79.1378,79.3190,77.8024,78.0766,76.6950,77.8253,77.4119,79.6947,77.7232,78.7732,79.4794,79.7714,79.3845,79.0747,77.0048,77.5543,78.8682,78.8001,78.6167,78.7177,79.8449,77.5385,77.9624));
 		 Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("departureDate"));  
